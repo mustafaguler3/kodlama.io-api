@@ -28,10 +28,25 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
-        {
+        {            
+            IResult result = CheckIfProductNameExists(product.ProductName);
+            
+            if (result != null)
+            {
+               return result;
+            }
             _productRepository.Add(product);
-
             return new SuccessResult(Message.ProductAdded);
+        }
+
+        private IResult CheckIfProductNameExists(string productName)
+        {
+            if (_productRepository.Get(p => p.ProductName == productName) != null)
+            {
+                return new ErrorResult(Message.ProductNameAlreadyExists);
+            }
+
+            return null;
         }
 
         public IResult Delete(Product product)
