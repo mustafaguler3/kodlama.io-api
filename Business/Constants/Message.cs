@@ -17,5 +17,7 @@ namespace Business.Constants
         public static string UserAlreadyTaken = "User already taken";
         public static string AccessTokenCreated = "created accesss token";
         public static string WrongValidationType = "geçersiz validasyon tipi";
+
+        public static string AuthorizationDenied = "yetkiniz yok!";
     }
 }

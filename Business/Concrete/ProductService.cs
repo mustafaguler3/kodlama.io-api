@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules;
 using Core.Aspects;
@@ -39,6 +40,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.ProductDeleted);
         }
 
+        [SecuredOperation("Product.List,Admin")]
         public IDataResult<List<Product>> GetList()
         {
             return new SuccessDataResult<List<Product>>(_productRepository.GetAll());
