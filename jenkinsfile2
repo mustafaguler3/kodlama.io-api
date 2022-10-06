@@ -1,0 +1,25 @@
+pipeline {
+    agent any {
+        stages {
+            stage('build'){
+                steps {
+                    bat '.net core'
+                }
+            }
+        }
+
+        post {
+            always {
+                echo 'always'
+            }
+
+            success {
+                echo 'only on success'
+            }
+
+            failure {
+                echo 'only on failure'
+            }
+        }
+    }
+}
